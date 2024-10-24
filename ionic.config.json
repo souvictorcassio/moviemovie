@@ -1,0 +1,7 @@
+{
+  "name": "moviemovie",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
