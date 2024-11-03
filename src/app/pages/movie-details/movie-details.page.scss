@@ -1,0 +1,53 @@
+ion-content {
+  --ion-background-color: #1e1e1e;
+  color: white;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+
+.movie-details-content {
+  padding: 15px;
+}
+
+.release-date,
+.rating {
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+.overview-text {
+  text-align: justify;
+  max-width: 90vw;
+  overflow-y: auto;
+}
+
+.small-text,
+.full-text {
+  font-size: 14px;
+}
+
+@media (min-width: 480px) {
+  .small-text,
+  .full-text {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .small-text,
+  .full-text {
+    font-size: 18px;
+  }
+}

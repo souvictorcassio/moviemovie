@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Buscar Filme</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="list-section">
+  <h2 class="list-text">
+  Descubra, favorite e tenha tudo o que você gosta ao seu alcance! 
+  </h2>
+  <ion-searchbar (ionInput)="onSearch($event)" debounce="500" placeholder="Buscar por nome"></ion-searchbar>
+  </div>
+
+  <ion-item>
+    <ion-label>Filtrar</ion-label>
+    <ion-select (ionChange)="onGenreChange($event)" placeholder="Selecione um Gênero" [value]="selectedGenre">
+      <ion-select-option [value]="null">Todos os Gêneros</ion-select-option>
+      <ion-select-option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let movie of movies" [routerLink]="['/movie-details', movie.id]">
+      <ion-thumbnail slot="start">
+        <img [src]="getImageUrl(movie.poster_path)" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ movie.title }}</h2>
+        <p>Gêneros: {{ getGenresMap(movie.genre_ids) }}</p>
+        <p>Lançamento: {{ movie.release_date | date: 'dd/MM/yyyy' }}</p>
+        <p>Avaliação: {{ movie.vote_average }}/10</p>
+      </ion-label>
+      <ion-icon 
+        [name]="isFavorited(movie.id) ? 'heart' : 'heart-outline'" 
+        slot="end" 
+        size="large"
+        color="danger"
+        (click)="toggleFavorite(movie)">
+      </ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

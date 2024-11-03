@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ movie?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="trailerUrl; else noTrailer" class="video-container">
+    <iframe
+      [src]="trailerUrl | safe: 'resourceUrl'"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <ng-template #noTrailer>
+    <ion-img [src]="getImageUrl(movie.poster_path)" class="movie-poster"></ion-img>
+  </ng-template>
+
+  <div class="movie-details-content">
+    <ion-button fill="clear" (click)="toggleFavorite(movie)">
+      <ion-icon
+        [name]="isFavorite(movie?.id) ? 'heart' : 'heart-outline'"
+        color="danger"
+      ></ion-icon>
+      Favoritar
+    </ion-button>
+
+    <h2>{{ movie?.title }}</h2>
+    <p class="release-date">Data de lançamento: {{ movie?.release_date | formatDate }}</p>
+    <p class="rating">Avaliação: {{ movie?.vote_average }}</p>
+
+    <div class="overview-text">
+      <p [ngClass]="{'small-text': !isExpanded, 'full-text': isExpanded}">
+        {{ isExpanded ? movie.overview : (movie.overview | slice:0:150) + '...' }}
+      </p>
+      <ion-button size="small" (click)="isExpanded = !isExpanded" fill="clear" color="primary">
+        {{ isExpanded ? 'Mostrar menos' : 'Mostrar mais' }}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
