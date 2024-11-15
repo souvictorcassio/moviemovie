@@ -3,6 +3,15 @@ ion-content {
   color: white;
 }
 
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+  color: white;
+}
+
 .highlight-slider {
   height: 10px;
   --bullet-background: White;
